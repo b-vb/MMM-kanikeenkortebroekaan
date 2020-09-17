@@ -1,13 +1,17 @@
 Module.register("MMM-kanikeenkortebroekaan", {
 	// Default module config.
 	defaults: {
-		refreshInterval: "2000" // 10 seconds
+		refreshInterval: "1800000" // 30 minutes
+	},
+
+	start: function (){
+		this.imageSrc = 0
 	},
 
 	// Override dom generator.
 	getDom: function () {
 		var image = document.createElement("IMG");
-		// image.setAttribute("src", `https://www.kanikeenkortebroekaan.nl/assets/${this.config.outcome}-man.png`);
+		image.setAttribute("src", this.imageSrc);
 		image.setAttribute("style", "filter: grayscale(100%); contrast(200%)");
 		image.setAttribute("width", "200em");
 		image.id = "SHORTS_IMAGE";
@@ -20,7 +24,6 @@ Module.register("MMM-kanikeenkortebroekaan", {
 				console.log("DOM_CREATED");
 				setInterval(() => {
 					this.sendSocketNotification("UPDATE_PLEASE");
-					this.count++;
 				}, this.config.refreshInterval);
 				break;
 		}
@@ -29,8 +32,9 @@ Module.register("MMM-kanikeenkortebroekaan", {
 	socketNotificationReceived: function (notification, { imageSrc }) {
 		switch (notification) {
 			case "ANSWER":
-				var image = document.getElementById("SHORTS_IMAGE");
-				image.setAttribute("src", imageSrc);
+				// var image = document.getElementById("SHORTS_IMAGE");
+				// image.setAttribute("src", imageSrc);
+				this.imageSrc = imageSrc;
 				break;
 		}
 	}
