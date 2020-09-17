@@ -1,4 +1,4 @@
-Module.register("kanikeenkortebroekaan", {
+Module.register("MMM-kanikeenkortebroekaan", {
 	// Default module config.
 	defaults: {
 		refreshInterval: "2000" // 10 seconds
